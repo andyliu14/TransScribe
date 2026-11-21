@@ -1,0 +1,58 @@
+[project]
+name = "transscribe"
+version = "0.1.0"
+description = "Notation-preserving chamber music arranging harness with CLI and MCP interfaces"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "music21>=9.7",
+    "starlette>=1.0,<2",
+    "uvicorn>=0.30,<1",
+    "music21-mcp",
+    "mcp>=1.0,<2",
+    "verovio>=5",
+    "cairosvg>=2.7",
+    "pypdf>=5",
+    "httpx>=0.28",
+    "brotli>=1.2.0",
+    "fonttools>=4.67.0",
+]
+
+[project.scripts]
+transscribe = "music_arranger.cli:main"
+arranger-mcp = "music_arranger.server:main"
+arranger = "music_arranger.cli:main"
+transscribe-mcp = "music_arranger.server:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.11"]
+
+[tool.uv.sources]
+music21-mcp = { path = "vendor/music21-mcp", editable = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/music_arranger"]
+
+# The checkout also contains research scores and historic rehearsal editions.
+# Ship the runnable harness and original example in the source release.
+[tool.hatch.build.targets.sdist]
+include = [
+    "/desktop", "/integrations", "/src", "/tests", "/scripts", "/examples", "/docs",
+    "/.agents/skills/transscribe", "/.codex/config.toml", "/.claude/skills/transscribe", "/.github/workflows", "/.gitattributes", "/.mcp.json", "/mcp-config.json",
+    "/STUDIES.md", "/AGENTS.md", "/CLAUDE.md", "/README.md", "/LICENSE", "/uv.lock", "/.python-version",
+    "/tools/librescore/*.json", "/tools/librescore/convert.mjs", "/tools/librescore/LICENSE*",
+    "/tools/audiveris/*.json", "/tools/audiveris/LICENSE*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.sdist.force-include]
+".claude/skills/transscribe" = ".claude/skills/transscribe"
+
+[tool.hatch.build.targets.wheel.force-include]
+"examples/courtyard.musicxml" = "music_arranger/web/courtyard.musicxml"

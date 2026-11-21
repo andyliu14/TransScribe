@@ -1,0 +1,10 @@
+{
+  "name": "transscribe-librescore-tools",
+  "private": true,
+  "type": "module",
+  "description": "Pinned, optional notation acquisition and native MuseScore conversion",
+  "dependencies": {
+    "dl-librescore": "0.35.40",
+    "webmscore": "1.2.1"
+  }
+}

@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+vendor/
+node_modules/
+dist/
+outputs/harness/
+runs/

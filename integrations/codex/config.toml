@@ -1,0 +1,7 @@
+[mcp_servers.transscribe]
+command = "uv"
+args = ["run", "--locked", "transscribe-mcp"]
+
+[mcp_servers.music21-upstream]
+command = "uv"
+args = ["run", "--locked", "python", "-m", "music21_mcp.server"]

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TransScribe</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+    <script src="/assets/workbench.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="shell brand">
+        <span class="mark" aria-hidden="true">♬</span> TransScribe
+        <a href="#packets">Rehearsal packets ↓</a>
+      </div>
+    </header>
+    <main class="shell">
+      <h1>Arrangement workbench</h1>
+      <div class="columns">
+        <section class="source panel">
+          <h2>Source score</h2>
+          <div class="modes" aria-label="Source type">
+            <button data-mode="example" aria-pressed="true">Example</button
+            ><button data-mode="catalog" aria-pressed="false">
+              PDMX catalog</button
+            ><button data-mode="upload" aria-pressed="false">Upload</button>
+          </div>
+          <div id="example">
+            <div class="paper">
+              <img
+                src="/assets/courtyard.png"
+                alt="Opening system of Courtyard Round for violin and viola"
+              />
+            </div>
+            <h3>Courtyard Round</h3>
+            <p>Violin and viola · 4 measures</p>
+          </div>
+          <div id="catalog" hidden>
+            <form id="lookup">
+              <label for="query">Title, composer or instrument</label>
+              <div class="row">
+                <input
+                  id="query"
+                  type="search"
+                  required
+                  placeholder="Passacaglia violin viola"
+                /><button class="dark">Search</button>
+              </div>
+            </form>
+            <p class="fine">
+              First search caches the 225 MB catalog. Importing an edition can
+              download the 1.9 GB score archive.
+            </p>
+            <p id="search-status" role="status"></p>
+            <div id="results"></div>
+            <div class="row">
+              <button id="prev" hidden>Previous</button
+              ><button id="next" hidden>Next</button>
+            </div>
+          </div>
+          <div id="upload" hidden>
+            <label for="notation">MusicXML or compressed MXL</label
+            ><input type="file" id="notation" accept=".xml,.musicxml,.mxl" />
+            <p>Choose an aligned score up to 64 MiB.</p>
+          </div>
+        </section>
+        <section class="panel setup">
+          <h2>Arrange</h2>
+          <p id="selected">Courtyard Round · violin and viola</p>
+          <a id="original" hidden>Download original score</a>
+          <label for="ensemble">Target ensemble</label
+          ><select id="ensemble">
+            <option value="trio">
+              Alto saxophone, cello &amp; double bass
+            </option>
+            <option value="duo">Cello &amp; double bass</option>
+          </select>
+          <details><summary>Edition settings</summary>
+          <label for="variant">Arrangement policy</label
+          ><select id="variant"></select>
+          <label class="check"
+            ><input type="checkbox" id="pdf" checked /> Engrave score and part
+            PDFs</label
+          >
+          <p id="print-help" hidden>Editable MusicXML and MIDI are available. Install Cairo and Fontconfig to add PDFs.</p>
+          </details>
+          <button id="build" class="primary" disabled>
+            Create score and parts <span aria-hidden="true">→</span>
+          </button>
+          <p id="status" role="status"></p>
+        </section>
+      </div>
+      <section id="packets">
+        <h2>Rehearsal packets</h2>
+        <div id="history" aria-live="polite"></div>
+      </section>
+      <details class="desktop-setup">
+        <summary>Connect Claude Desktop</summary>
+        <p>
+          <a href="/desktop-config.json"
+            >Download this machine’s MCP configuration</a
+          >. Merge its transscribe entry into the mcpServers section of
+          your Claude Desktop developer configuration, then quit and reopen
+          Claude Desktop. Use absolute paths for local score files and output
+          folders.
+        </p>
+      </details>
+    </main>
+  </body>
+</html>

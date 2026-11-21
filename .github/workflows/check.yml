@@ -1,0 +1,57 @@
+name: Check TransScribe
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          version: "0.12.18"
+      - run: sudo apt-get update && sudo apt-get install -y libcairo2 libfontconfig1
+      - run: python3 scripts/bootstrap_vendor.py
+      - run: uv sync --locked
+      - run: npm ci --ignore-scripts --prefix tools/librescore
+      - run: uv run --locked pytest -q
+      - run: uv run --locked python scripts/smoke_mcp.py
+      - run: uv build --sdist
+      - name: Exercise the source release
+        run: |
+          mkdir "$RUNNER_TEMP/arranger-release"
+          tar xzf dist/*.tar.gz --strip-components=1 -C "$RUNNER_TEMP/arranger-release"
+          cd "$RUNNER_TEMP/arranger-release"
+          test -r .agents/skills/transscribe/SKILL.md
+          test -r .claude/skills/transscribe/SKILL.md
+          python3 scripts/bootstrap_vendor.py
+          uv sync --locked
+          uv run --locked transscribe packet examples/courtyard.musicxml --output rehearsal
+          uv run --locked python scripts/smoke_mcp.py
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: Linux-x64
+          - os: macos-15
+            platform: macOS-Apple-Silicon
+          - os: windows-latest
+            platform: Windows-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e
+        with:
+          version: "0.12.18"
+      - shell: bash
+        run: |
+          python scripts/bootstrap_vendor.py
+          uv build --sdist
+          python scripts/build_desktop.py dist/transscribe-*.tar.gz --platform "${{ matrix.platform }}"
+          unzip -q dist/desktop/*.zip -d "$RUNNER_TEMP/desktop test"
+          cd "$RUNNER_TEMP/desktop test/TransScribe"
+          if [[ "$RUNNER_OS" == Windows ]]; then runner=runtime/uv.exe; else runner=runtime/uv; fi
+          "$runner" run --locked --no-dev transscribe packet examples/courtyard.musicxml --output test-packet --no-render
+          test -s test-packet/rehearsal.zip

@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "transscribe": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--locked",
+        "transscribe-mcp"
+      ]
+    },
+    "music21-upstream": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--locked",
+        "python",
+        "-m",
+        "music21_mcp.server"
+      ]
+    }
+  }
+}

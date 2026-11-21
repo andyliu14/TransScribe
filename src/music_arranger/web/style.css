@@ -1,0 +1,285 @@
+:root {
+  color-scheme: light;
+  --ink: #202f2b;
+  --muted: #52625b;
+  --line: #cbcfc3;
+  --green: #125845;
+  --paper: #fffef9;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #f4f4ed;
+  color: var(--ink);
+  font:
+    16px/1.5 "Instrument Sans",
+    system-ui,
+    sans-serif;
+}
+.shell {
+  width: min(1150px, 92%);
+  margin: auto;
+}
+header {
+  background: #173e33;
+  color: #fff;
+  border-bottom: 4px solid #bcd379;
+}
+.brand {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 21px;
+  font-weight: 650;
+}
+.mark {
+  border: 1px solid #9fbca9;
+  border-radius: 5px;
+  padding: 0 8px;
+}
+.brand a {
+  margin-left: auto;
+  color: #f1f6dd;
+  font-size: 14px;
+}
+h1,
+h2,
+h3 {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 500;
+  line-height: 1.12;
+}
+h1 {
+  font-size: clamp(37px, 5.3vw, 68px);
+  margin: 42px 0 28px;
+  letter-spacing: -0.045em;
+}
+h2 {
+  font-size: 32px;
+  letter-spacing: -0.03em;
+  margin: 0 0 19px;
+}
+h3 {
+  font-size: 25px;
+  margin: 17px 0 0;
+}
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.32fr) minmax(300px, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+.panel,
+.edition {
+  border: 1px solid var(--line);
+  background: var(--paper);
+  border-radius: 9px;
+}
+.panel {
+  padding: 26px 30px;
+}
+.modes {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  gap: 18px;
+  margin-bottom: 21px;
+}
+.modes button {
+  background: none;
+  color: var(--muted);
+  border: none;
+  border-radius: 0;
+  padding: 6px 2px 11px;
+}
+.modes button[aria-pressed="true"] {
+  color: var(--green);
+  box-shadow: inset 0 -3px var(--green);
+}
+.paper {
+  background: #f1efdf;
+  border: 1px solid #dedac7;
+  border-radius: 5px;
+  padding: 16px 8px;
+}
+.paper img {
+  display: block;
+  width: 100%;
+  mix-blend-mode: multiply;
+}
+.source p,
+.setup p {
+  margin: 6px 0;
+  color: var(--muted);
+}
+.setup {
+  border-top: 4px solid var(--green);
+}
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 650;
+  margin: 16px 0 6px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.row input {
+  min-width: 0;
+  flex: 1;
+}
+input,
+select,
+button {
+  font: inherit;
+}
+input:not([type="checkbox"]),
+select,
+button {
+  border: 1px solid #a7b0a4;
+  border-radius: 5px;
+  background: white;
+  color: var(--ink);
+  padding: 9px 11px;
+}
+select,
+input[type="file"] {
+  width: 100%;
+}
+button,
+a {
+  cursor: pointer;
+}
+button:hover:enabled {
+  border-color: var(--green);
+  background: #e8eee2;
+}
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 400;
+  margin: 17px 0;
+}
+.check input {
+  accent-color: var(--green);
+}
+.primary,
+.dark {
+  background: var(--green);
+  color: white;
+}
+.primary {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  padding: 12px 15px;
+}
+.primary:hover:enabled,
+.dark:hover:enabled {
+  color: white;
+  background: #0b4233;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+a {
+  color: var(--green);
+  text-underline-offset: 3px;
+}
+.fine,
+#status,
+#search-status {
+  font-size: 14px;
+}
+.setup p:empty,
+.source p:empty {
+  margin: 0;
+}
+#packets {
+  margin: 34px 0 55px;
+}
+#history > p {
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 15px;
+}
+.edition {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  margin: 8px 0;
+}
+.links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.edition small,
+.result small {
+  display: block;
+  color: var(--muted);
+}
+.result {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.result[aria-pressed="true"] {
+  outline: 2px solid var(--green);
+}
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: 3px solid #bb7127;
+  outline-offset: 2px;
+}
+@media (max-width: 760px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    padding: 21px;
+  }
+  .edition {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .brand a {
+    font-size: 12px;
+  }
+  .modes {
+    gap: 12px;
+  }
+}
+
+.links {
+  align-items: center;
+}
+.copy {
+  font-size: 14px;
+  padding: 6px 9px;
+}
+
+.desktop-setup {
+  margin: -20px 0 45px;
+  color: var(--muted);
+}
+.desktop-setup summary {
+  cursor: pointer;
+}
+.desktop-setup p {
+  max-width: 65ch;
+}
+
+.setup details {margin: 1rem 0;}
+.setup summary {cursor: pointer;}

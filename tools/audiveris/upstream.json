@@ -1,0 +1,20 @@
+{
+  "name": "Audiveris",
+  "version": "5.11.0",
+  "repository": "https://github.com/Audiveris/audiveris",
+  "license": "AGPL-3.0",
+  "asset": "Audiveris-5.11.0-ubuntu22.04-x86_64.deb",
+  "url": "https://github.com/Audiveris/audiveris/releases/download/5.11.0/Audiveris-5.11.0-ubuntu22.04-x86_64.deb",
+  "sha256": "ae714594f40e54b1a4951fc3f914f08ae38fe5d07b7f2283b1a904fdb6e0a318",
+  "cli_documentation": "https://audiveris.github.io/audiveris/_pages/guides/advanced/cli/",
+  "installation": "Extracted into ~/.cache/music-arranger/audiveris-5.11.0; bundled JRE, no system installation",
+  "limitations": "Printed notation OMR requires review; exporting valid MusicXML does not establish accurate transcription.",
+  "text_ocr": {
+    "repository": "https://github.com/tesseract-ocr/tessdata_fast",
+    "commit": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+    "language": "eng",
+    "url": "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/65727574dfcd264acbb0c3e07860e4e9e9b22185/eng.traineddata",
+    "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+    "license": "Apache-2.0"
+  }
+}

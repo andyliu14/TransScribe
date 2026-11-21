@@ -1,0 +1,16 @@
+{
+  "dl-librescore": {
+    "version": "0.35.40",
+    "repository": "https://github.com/LibreScore/dl-librescore",
+    "reviewed_commit": "5a9491f977f900943cb6f1ed3d703eb701bb03a6",
+    "license": "MIT"
+  },
+  "webmscore": {
+    "version": "1.2.1",
+    "repository": "https://github.com/LibreScore/webmscore",
+    "git_head": null,
+    "license_as_declared": "GPL"
+  },
+  "dependency_integrity": "package-lock.json",
+  "note": "Downloader/engine licenses do not license downloaded compositions or editions."
+}
